@@ -11,9 +11,20 @@ var createPolitician = function (name) {
     };
     politician.announce();
 
+    politician.tallyTotal = function () {
+
+        this.tally = 0;
+
+        for (var i = 0; i < this.electionResults.length; i++) {
+            this.tally = this.tally + this.electionResults[i];
+        }
+    };
+
+
     return politician;
 
 };
+
 var polly = createPolitician("Polly Tishon");
 var barry = createPolitician("Barry Phishy");
 
@@ -27,3 +38,23 @@ polly.electionResults[43] = 11;
 barry.electionResults[9] = 28;
 barry.electionResults[4] = 38;
 barry.electionResults[43] = 27;
+
+polly.tallyTotal();
+barry.tallyTotal();
+
+console.log(polly.tally);
+console.log(barry.tally);
+
+var winner = function () {
+    if (polly.tally < barry.tally) {
+        winner = barry.name;
+
+    } else if (polly.tally > barry.tally) {
+        winner = polly.name;
+
+    } else {
+        winner = "Draw!"
+    }
+    console.log("And the winner is..." + winner + "!!!");
+}
+winner();
