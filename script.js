@@ -1,14 +1,11 @@
 var createPolitician = function (name, partyColor) {
 
     var politician = {};
-    
 
     politician.name = name;
     politician.partyColor = partyColor;
     // politician.electionResults = null;
     // politician.totalVotes = 0;
-    
-    
 
     politician.announce = function () {
         console.log(politician.name)
@@ -23,10 +20,7 @@ var createPolitician = function (name, partyColor) {
             this.tally = this.tally + this.electionResults[i];
         }
     };
-
-
     return politician;
-
 };
 
 var polly = createPolitician("Polly Tishon", [132, 17, 11]);
@@ -43,23 +37,24 @@ barry.electionResults[9] = 28;
 barry.electionResults[4] = 38;
 barry.electionResults[43] = 27;
 
-function setStateResults(state){
-    theStates[states].winner = null;
-    
+function setStateResults(state) {
+    theStates[state].winner = null;
+
     if (polly.electionResults[state] > barry.electionResults[state]) {
         theStates[state].winner = polly;
-    }else if (polly.electionResults[state] < barry.electionResults[state]) {
+
+    } else if (polly.electionResults[state] < barry.electionResults[state]) {
         theStates[state].winner = barry;
     }
+
     var stateWinner = theStates[state].winner;
 
     if (stateWinner !== null) {
-        theStates[state].rgbColor = stateWinner.partyColor; 
+        theStates[state].rgbColor = stateWinner.partyColor;
     } else {
         theStates[state].rgbColor = [11, 32, 57];
     }
 }
-
 
 polly.tallyTotal();
 barry.tallyTotal();
@@ -83,4 +78,14 @@ var winner = function () {
     console.log("And the winner is..." + winner + "!!!");
 }
 winner();
+
+var countryResults = document.getElementById('countryResults');
+
+countryResults.children[0].children[0].children[0].innerText = "Polly Tishon";
+countryResults.children[0].children[0].children[1].innerText = polly.tally;
+countryResults.children[0].children[0].children[2].innerText = "Barry Phishy";
+countryResults.children[0].children[0].children[3].innerText = barry.tally;
+countryResults.children[0].children[0].children[4].innerText = "Winner";
+countryResults.children[0].children[0].children[5].innerText = winner; 
+
 
