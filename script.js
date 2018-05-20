@@ -1,10 +1,14 @@
-var createPolitician = function (name) {
+var createPolitician = function (name, partyColor) {
 
     var politician = {};
+    
 
     politician.name = name;
-    politician.electionResults = null;
-    politician.totalVotes = 0;
+    politician.partyColor = partyColor;
+    // politician.electionResults = null;
+    // politician.totalVotes = 0;
+    
+    
 
     politician.announce = function () {
         console.log(politician.name)
@@ -25,8 +29,8 @@ var createPolitician = function (name) {
 
 };
 
-var polly = createPolitician("Polly Tishon");
-var barry = createPolitician("Barry Phishy");
+var polly = createPolitician("Polly Tishon", [132, 17, 11]);
+var barry = createPolitician("Barry Phishy", [245, 141, 136]);
 
 polly.electionResults = [5, 1, 7, 2, 33, 6, 4, 2, 1, 14, 8, 3, 1, 11, 11, 0, 5, 3, 3, 3, 7, 4, 8, 9, 3, 7, 2, 2, 4, 2, 8, 3, 15, 15, 2, 12, 0, 4, 13, 1, 3, 2, 8, 21, 3, 2, 11, 1, 3, 7, 2];
 barry.electionResults = [4, 2, 4, 4, 22, 3, 3, 1, 2, 15, 8, 1, 3, 9, 0, 6, 1, 5, 5, 1, 3, 7, 8, 1, 3, 3, 1, 3, 2, 2, 6, 2, 14, 0, 1, 6, 7, 3, 7, 3, 6, 1, 3, 17, 3, 1, 2, 11, 2, 3, 1];
@@ -39,11 +43,32 @@ barry.electionResults[9] = 28;
 barry.electionResults[4] = 38;
 barry.electionResults[43] = 27;
 
+function setStateResults(state){
+    theStates[states].winner = null;
+    
+    if (polly.electionResults[state] > barry.electionResults[state]) {
+        theStates[state].winner = polly;
+    }else if (polly.electionResults[state] < barry.electionResults[state]) {
+        theStates[state].winner = barry;
+    }
+    var stateWinner = theStates[state].winner;
+
+    if (stateWinner !== null) {
+        theStates[state].rgbColor = stateWinner.partyColor; 
+    } else {
+        theStates[state].rgbColor = [11, 32, 57];
+    }
+}
+
+
 polly.tallyTotal();
 barry.tallyTotal();
 
 console.log(polly.tally);
 console.log(barry.tally);
+
+console.log(polly.partyColor);
+console.log(barry.partyColor);
 
 var winner = function () {
     if (polly.tally < barry.tally) {
@@ -58,3 +83,4 @@ var winner = function () {
     console.log("And the winner is..." + winner + "!!!");
 }
 winner();
+
