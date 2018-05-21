@@ -54,6 +54,34 @@ function setStateResults(state) {
     } else {
         theStates[state].rgbColor = [11, 32, 57];
     }
+    var stateInfoTable = document.getElementById('stateResults');
+
+    var header = stateInfoTable.children[0].children[0];
+    var stateName = header.children[0];
+    stateName.innerText = theStates[state].nameFull;
+    var abbrev = header.children[1];
+    abbrev.innerText = theStates[state].nameAbbrev;
+
+    var body = stateInfoTable.children[1];
+    var candidate1Name = body.children[0].children[0];
+    candidate1Name.innerText = polly.name;
+
+    var candidate2Name = body.children[1].children[0];
+    candidate2Name.innerText = barry.name;
+
+    var candidate1Results = body.children[0].children[1];
+    candidate1Results.innerText = polly.electionResults[state];
+
+    var candidate2Results = body.children[1].children[1];
+    candidate2Results.innerText = barry.electionResults[state];
+
+    var winnersName = body.children[2].children[1];
+
+    if (theStates[state].winner === null){
+        winnersName.innerText = "DRAW";
+    } else {
+        winnersName.innerText = theStates[state].winner.name;
+    }
 }
 
 polly.tallyTotal();
@@ -86,6 +114,9 @@ countryResults.children[0].children[0].children[1].innerText = polly.tally;
 countryResults.children[0].children[0].children[2].innerText = "Barry Phishy";
 countryResults.children[0].children[0].children[3].innerText = barry.tally;
 countryResults.children[0].children[0].children[4].innerText = "Winner";
-countryResults.children[0].children[0].children[5].innerText = winner; 
+countryResults.children[0].children[0].children[5].innerText = winner;
+
+
+
 
 
